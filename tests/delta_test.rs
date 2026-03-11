@@ -1,7 +1,7 @@
 use xdelta::Index;
 
-const SOURCE: &str = "the quick brown fox jumps over the slow lazy dog";
-const TARGET: &str = "a swift auburn fox jumps over three dormant hounds";
+const SOURCE: &[u8] = b"the quick brown fox jumps over the slow lazy dog";
+const TARGET: &[u8] = b"a swift auburn fox jumps over three dormant hounds";
 
 #[test]
 fn delta_len() {

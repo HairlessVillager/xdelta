@@ -10,8 +10,8 @@ use crate::Index;
 
 #[test]
 fn compress_string() {
-    let source = "the quick brown fox jumps over the slow lazy dog";
-    let target = "a swift auburn fox jumps over three dormant hounds";
+    let source = b"the quick brown fox jumps over the slow lazy dog";
+    let target = b"a swift auburn fox jumps over three dormant hounds";
 
     let delta = Index::new(source).compress(target);
 
@@ -27,8 +27,8 @@ fn compress_string() {
 
 #[test]
 fn compress_incomplete_block() {
-    let source = "the quick brown fox jumps over the slow lazy dog";
-    let target = "he quick brown fox jumps over trees";
+    let source = b"the quick brown fox jumps over the slow lazy dog";
+    let target = b"he quick brown fox jumps over trees";
 
     let delta = Index::new(source).compress(target);
 
@@ -37,8 +37,8 @@ fn compress_incomplete_block() {
 
 #[test]
 fn compress_at_source_start() {
-    let source = "the quick brown fox jumps over the slow lazy dog";
-    let target = "the quick brown ";
+    let source = b"the quick brown fox jumps over the slow lazy dog";
+    let target = b"the quick brown ";
 
     let delta = Index::new(source).compress(target);
 
@@ -47,8 +47,8 @@ fn compress_at_source_start() {
 
 #[test]
 fn compress_at_source_start_with_right_expansion() {
-    let source = "the quick brown fox jumps over the slow lazy dog";
-    let target = "the quick brown fox hops";
+    let source = b"the quick brown fox jumps over the slow lazy dog";
+    let target = b"the quick brown fox hops";
 
     let delta = Index::new(source).compress(target);
 
@@ -57,8 +57,8 @@ fn compress_at_source_start_with_right_expansion() {
 
 #[test]
 fn compress_at_source_start_with_left_offset() {
-    let source = "the quick brown fox jumps over the slow lazy dog";
-    let target = "behold the quick brown foal";
+    let source = b"the quick brown fox jumps over the slow lazy dog";
+    let target = b"behold the quick brown foal";
 
     let delta = Index::new(source).compress(target);
 
@@ -70,8 +70,8 @@ fn compress_at_source_start_with_left_offset() {
 
 #[test]
 fn compress_at_source_end() {
-    let source = "the quick brown fox jumps over the slow lazy dog";
-    let target = "he slow lazy dog";
+    let source = b"the quick brown fox jumps over the slow lazy dog";
+    let target = b"he slow lazy dog";
 
     let delta = Index::new(source).compress(target);
 
@@ -80,8 +80,8 @@ fn compress_at_source_end() {
 
 #[test]
 fn compress_at_source_end_with_left_expansion() {
-    let source = "the quick brown fox jumps over the slow lazy dog";
-    let target = "under the slow lazy dog";
+    let source = b"the quick brown fox jumps over the slow lazy dog";
+    let target = b"under the slow lazy dog";
 
     let delta = Index::new(source).compress(target);
 
@@ -90,8 +90,8 @@ fn compress_at_source_end_with_left_expansion() {
 
 #[test]
 fn compress_at_source_end_with_right_offset() {
-    let source = "the quick brown fox jumps over the slow lazy dog";
-    let target = "under the slow lazy dog's legs";
+    let source = b"the quick brown fox jumps over the slow lazy dog";
+    let target = b"under the slow lazy dog's legs";
 
     let delta = Index::new(source).compress(target);
 
@@ -103,8 +103,8 @@ fn compress_at_source_end_with_right_offset() {
 
 #[test]
 fn compress_unindexed_bytes() {
-    let source = "the quick brown fox";
-    let target = "see the quick brown fox";
+    let source = b"the quick brown fox";
+    let target = b"see the quick brown fox";
 
     let delta = Index::new(source).compress(target);
 
@@ -113,8 +113,8 @@ fn compress_unindexed_bytes() {
 
 #[test]
 fn do_not_compress_unindexed_bytes() {
-    let source = "the quick brown fox";
-    let target = "a quick brown fox";
+    let source = b"the quick brown fox";
+    let target = b"a quick brown fox";
 
     let delta = Index::new(source).compress(target);
 

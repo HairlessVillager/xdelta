@@ -13,9 +13,9 @@ pub struct Index {
 }
 
 impl Index {
-    pub fn new(source: &str) -> Self {
+    pub fn new(source: &[u8]) -> Self {
         let mut index = Index {
-            source: source.bytes().collect(),
+            source: source.iter().copied().collect(),
             offsets: HashMap::new(),
         };
 
@@ -27,7 +27,7 @@ impl Index {
         index
     }
 
-    pub fn compress(&self, target: &str) -> Delta {
+    pub fn compress(&self, target: &[u8]) -> Delta {
         let source_size = self.source.len();
         let target_size = target.len();
 
@@ -55,7 +55,7 @@ struct Compressor<'i, 't> {
 }
 
 impl<'i, 't> Compressor<'i, 't> {
-    fn new(index: &'i Index, target: &'t str) -> Self {
+    fn new(index: &'i Index, target: &'t [u8]) -> Self {
         Compressor {
             index,
             target: target.as_ref(),
